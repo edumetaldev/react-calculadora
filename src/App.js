@@ -1,8 +1,8 @@
 import './App.css';
-import fcclogo from './images/FreeCodeCamp_logo.svg';
 import Boton from './components/Boton';
 import Pantalla from './components/Pantalla';
 import BotonClear from './components/BotonClear';
+import Logo from './components/Logo';
 import { useState } from 'react';
 import { evaluate } from 'mathjs';
 
@@ -11,7 +11,9 @@ function App() {
   const [input, setInput] = useState('');
 
   const agregarInput = (val) => {
-    setInput(input + val);
+    if (!(isNaN(input.slice(-1)) && isNaN(val))) {
+      setInput(input + val);
+    }
   };
 
   const calcularResultado = () => {
@@ -24,14 +26,7 @@ function App() {
 
   return (
     <div className='App'>
-      <div className='fcc-logo-contenedor'>
-        <img
-          src={fcclogo}
-          className='fcc-logo'
-          alt='logo de fcc'
-        />
-      </div>
-
+      <Logo></Logo>
       <div className='contenedor-calculadora'>
         <Pantalla input={input} />
         <div className='fila'>
@@ -59,7 +54,7 @@ function App() {
           <Boton manejarClic={agregarInput}>/</Boton>
         </div>
         <div className='fila'>
-          <BotonClear manejarClear={()=>setInput('')}>Clear</BotonClear>
+          <BotonClear manejarClear={() => setInput('')}>Clear</BotonClear>
         </div>
       </div>
     </div>
